@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Definição do tipo de documento HTML5 -->
+  <meta charset="UTF-8"> <!-- Define o padrão de caracteres como UTF-8, garantindo suporte a acentos -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <!-- Torna a página responsiva, ajustando-se ao tamanho da tela (desktop, tablet, mobile) -->
+  
+  <title>MyILove - Eventos</title> <!-- Título exibido na aba do navegador -->
+  
+  <!-- Importa a folha de estilos CSS principal -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Importa a biblioteca de ícones Lucide (ícones em SVG) -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Barra lateral de navegação    -->
+    <nav class="sidebar">
+      <h2>MyILove 💕</h2> <!-- Identidade da aplicação (branding) -->
+
+      <!-- Menu principal -->
+      <ul>
+        <!-- Cada item do menu possui um ícone (Lucide) + texto -->
+        <!-- A classe "active" marca qual página está sendo exibida -->
+        <li><a href="dashboard.html"><i data-lucide="home"></i> Início</a></li>
+        <li><a href="eventos.html" class="active"><i data-lucide="calendar"></i> Eventos</a></li>
+        <li><a href="desejos.html"><i data-lucide="heart"></i> Desejos</a></li>
+        <li><a href="anotacoes.html"><i data-lucide="file-text"></i> Anotações</a></li>
+        <li><a href="fotos.html"><i data-lucide="camera"></i> Fotos</a></li>
+        <li><a href="viagens.html"><i data-lucide="map"></i> Viagens</a></li>
+        <li><a href="realizadas.html"><i data-lucide="check-circle"></i> Realizadas</a></li>
+        <li><a href="config.html"><i data-lucide="settings"></i> Configurações</a></li>
+      </ul>
+    </nav>
+
+    <!-- Conteúdo principal da página  -->
+    <main class="content">
+      <h2>Eventos ✨</h2>
+      <p>Aqui você pode registrar encontros, datas importantes e planos futuros.</p>
+      <!-- Esta seção poderá futuramente ser expandida com cards, calendário ou lista de eventos -->
+    </main>
+  </div>
+
+  <!-- Script principal da aplicação -->
+  <script src="script.js"></script>
+
+  <!-- Inicialização dos ícones Lucide (gera os SVGs nos elementos <i>) -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Definindo o charset como UTF-8 para suportar caracteres especiais -->
+  <meta charset="UTF-8"/>
+  <!-- Tornando a página responsiva em dispositivos móveis -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Título que aparece na aba do navegador -->
+  <title>MyILove - Eventos</title>
+  <!-- Link para o arquivo de estilos CSS -->
+  <link rel="stylesheet" href="style.css"/>
+  <!-- Biblioteca de ícones Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Container principal da aplicação, organiza sidebar + conteúdo -->
+  <div class="container">
+
+    <!-- Sidebar lateral com navegação do aplicativo -->
+    <nav class="sidebar">
+      <h2>MyILove 💕</h2>
+      <ul>
+        <!-- Cada item de menu leva a uma página diferente -->
+        <li><a href="index.html"><i data-lucide="home"></i> Início</a></li>
+        <li><a href="eventos.html"><i data-lucide="calendar"></i> Eventos</a></li>
+        <li><a href="desejos.html"><i data-lucide="heart"></i> Desejos</a></li>
+        <li><a href="anotacoes.html"><i data-lucide="file-text"></i> Anotações</a></li>
+        <li><a href="fotos.html"><i data-lucide="camera"></i> Fotos</a></li>
+        <li><a href="viagens.html"><i data-lucide="map"></i> Viagens</a></li>
+        <li><a href="realizadas.html"><i data-lucide="check-circle"></i> Realizadas</a></li>
+        <li><a href="config.html"><i data-lucide="settings"></i> Configurações</a></li>
+      </ul>
+    </nav>
+
+    <!-- Área principal de conteúdo -->
+    <main class="content">
+      <!-- Cabeçalho da página com título e botão de adicionar evento -->
+      <div class="page-header">
+        <h2>Eventos 📅</h2>
+        <button class="add-btn" onclick="openEventModal()">
+          <i data-lucide="plus"></i> Adicionar Evento
+        </button>
+      </div>
+
+      <!-- Seção do calendário -->
+      <div class="calendar-view">
+        <div class="calendar-header">
+          <!-- Botões para navegar entre meses -->
+          <button onclick="changeMonth(-1)"><i data-lucide="chevron-left"></i></button>
+          <h3 id="currentMonth"></h3> <!-- Nome do mês atual -->
+          <button onclick="changeMonth(1)"><i data-lucide="chevron-right"></i></button>
+        </div>
+        <!-- Grid onde os dias do mês serão exibidos -->
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </div>
+
+      <!-- Lista de próximos eventos cadastrados -->
+      <div class="events-list">
+        <h3>Próximos Eventos</h3>
+        <div id="eventsList">
+          <!-- Estado inicial quando não há eventos -->
+          <p class="empty-state">Nenhum evento cadastrado. Que tal planejar algo especial? 💖</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!--Modal para cadastro de novo evento -->
+
+  <div id="eventModal" class="modal">
+    <div class="modal-content">
+      <!-- Cabeçalho do modal com título e botão de fechar -->
+      <div class="modal-header">
+        <h3>Novo Evento</h3>
+        <span class="close" onclick="closeEventModal()">&times;</span>
+      </div>
+      <!-- Formulário para adicionar evento -->
+      <form id="eventForm">
+        <!-- Campos básicos do evento -->
+        <input type="text" id="eventTitle" placeholder="Título do evento" required>
+        <input type="date" id="eventDate" required>
+        <input type="time" id="eventTime">
+        <textarea id="eventDescription" placeholder="Descrição (opcional)"></textarea>
+        <!-- Categoria do evento -->
+        <select id="eventCategory">
+          <option value="date">Encontro</option>
+          <option value="anniversary">Aniversário</option>
+          <option value="travel">Viagem</option>
+          <option value="special">Especial</option>
+        </select>
+        <!-- Botão para enviar o formulário -->
+        <button type="submit" class="submit-btn">Adicionar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts do projeto -->
+  <script src="script.js"></script> <!-- Script global compartilhado -->
+  <script src="eventos.js"></script> <!-- Script específico de eventos -->
+</body>
+</html>

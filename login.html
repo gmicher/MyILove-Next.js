@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!-- Define que a página está em português do Brasil -->
+<head>
+    <meta charset="UTF-8">
+    <!-- Define a codificação de caracteres para UTF-8 -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Configura a viewport para dispositivos móveis, garantindo responsividade -->
+
+    <title>CoupleConnect - Login</title>
+    <!-- Título da página -->
+
+    <style>
+        /*RESET BÁSICO E BOX-SIZING*/
+        * {
+            margin: 0;            /* Remove margens padrão */
+            padding: 0;           /* Remove padding padrão */
+            box-sizing: border-box; /* Inclui padding e border na largura/altura */
+        }
+
+        /*ESTILO DO BODY*/
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte principal */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradiente de fundo */
+            min-height: 100vh;    /* Garante altura mínima igual à altura da tela */
+            display: flex;        /* Usa flexbox para centralizar o conteúdo */
+            align-items: center;  /* Centraliza verticalmente */
+            justify-content: center; /* Centraliza horizontalmente */
+            padding: 20px;        /* Espaçamento interno */
+        }
+
+        /*CONTAINER DO LOGIN*/
+        .login-container {
+            background: rgba(255, 255, 255, 0.95); /* Fundo branco semi-transparente */
+            backdrop-filter: blur(10px);           /* Efeito de desfoque atrás do container */
+            border-radius: 20px;                   /* Cantos arredondados */
+            padding: 40px;                          /* Espaçamento interno */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            width: 100%;                            /* Largura total do container */
+            max-width: 400px;                       /* Largura máxima */
+            text-align: center;                      /* Centraliza textos */
+        }
+
+        /*LOGO E NOME DO APP*/
+        .logo {
+            font-size: 2.5rem;  /* Tamanho da fonte grande para o logo */
+            margin-bottom: 10px;
+            color: #e91e63;     /* Cor rosa */
+        }
+
+        .app-name {
+            font-size: 1.8rem; 
+            font-weight: bold; 
+            color: #333;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #e91e63, #9c27b0); /* Gradiente do texto */
+            -webkit-background-clip: text;  /* Clipa o gradiente no texto (Safari/Chrome) */
+            -webkit-text-fill-color: transparent; /* Texto transparente para mostrar o gradiente */
+            background-clip: text;          /* Compatibilidade futura */
+        }
+
+        .subtitle {
+            color: #666;       /* Cor cinza */
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        /*CAMPOS DE INPUT*/
+        .input-group {
+            margin-bottom: 20px; /* Espaço entre campos */
+            position: relative;  /* Para posicionamento de ícones ou mensagens */
+        }
+
+        .input-field {
+            width: 100%; 
+            padding: 15px 20px; 
+            border: 2px solid #e0e0e0; 
+            border-radius: 25px; 
+            font-size: 1rem; 
+            transition: all 0.3s ease; /* Animações suaves */
+            background: rgba(255, 255, 255, 0.9); 
+        }
+
+        .input-field:focus {
+            outline: none; 
+            border-color: #e91e63; /* Destaca borda quando selecionado */
+            box-shadow: 0 0 15px rgba(233, 30, 99, 0.2); /* Sombra ao focar */
+            transform: translateY(-2px); /* Leve movimento para cima */
+        }
+
+        .input-field::placeholder {
+            color: #999; /* Cor cinza clara para placeholder */
+        }
+
+        /*BOTÃO DE LOGIN*/
+        .login-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #e91e63, #9c27b0); /* Gradiente rosa */
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer; /* Muda cursor para mãozinha */
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px); /* Movimento ao passar o mouse */
+            box-shadow: 0 10px 25px rgba(233, 30, 99, 0.3); /* Sombra maior ao passar o mouse */
+        }
+
+        .login-button:active {
+            transform: translateY(0); /* Botão volta ao normal ao clicar */
+        }
+
+        /*LINK "ESQUECI MINHA SENHA"*/
+        .forgot-password {
+            color: #e91e63;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #9c27b0; /* Cor muda ao passar o mouse */
+        }
+
+        /*DIVIDER (linha separadora)*/
+        .divider {
+            margin: 30px 0;
+            position: relative;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .divider::before {
+            content: '';           /* Linha horizontal */
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e0e0e0;
+        }
+
+        .divider span {
+            background: rgba(255, 255, 255, 0.95); /* Fundo do texto da divider */
+            padding: 0 15px;
+        }
+
+        /*LINK PARA CADASTRO*/
+        .signup-link {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .signup-link a {
+            color: #e91e63; /* Cor rosa */
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover {
+            color: #9c27b0; /* Gradiente ao passar mouse */
+        }
+
+        /*MENSAGENS DE ERRO E SUCESSO*/
+        .error-message {
+            color: #f44336; /* Vermelho para erro */
+            font-size: 0.8rem;
+            margin-top: 5px;
+            text-align: left;
+            display: none; /* Inicialmente oculto */
+        }
+
+        .success-message {
+            color: #4caf50; /* Verde para sucesso */
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none; /* Inicialmente oculto */
+        }
+
+        /*ANIMAÇÃO DE ENTRADA*/
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px); /* Começa abaixo */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0); /* Termina no lugar */
+            }
+        }
+
+        .login-container {
+            animation: slideIn 0.6s ease-out; /* Aplica a animação */
+        }
+
+        /*RESPONSIVO PARA TELAS PEQUENAS*/
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px; /* Menor padding em telas pequenas */
+                margin: 10px;
+            }
+            
+            .app-name {
+                font-size: 1.5rem; /* Ajusta tamanho do texto do app */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!--CONTAINER PRINCIPAL DO LOGIN-->
+    <div class="login-container">
+        <!-- Ícone/Logo do App -->
+        <div class="logo">💕</div>
+
+        <!-- Nome do App -->
+        <h1 class="app-name">CoupleConnect</h1>
+
+        <!-- Subtítulo/descrição do login -->
+        <p class="subtitle">Conecte-se com seu amor</p>
+        
+        <!-- FORMULÁRIO DE LOGIN -->
+        <form id="loginForm">
+            <!-- Grupo de input para email -->
+            <div class="input-group">
+                <input 
+                    type="email"             
+                    id="email"               
+                    class="input-field"      
+                    placeholder="E-mail"
+                    required                 
+                >
+                
+                <!-- Mensagem de erro do email -->
+                <div class="error-message" id="emailError"></div>
+            </div>
+            
+            <!-- Grupo de input para senha -->
+            <div class="input-group">
+                <input 
+                    type="password"
+                    id="password"
+                    class="input-field"
+                    placeholder="Senha"
+                    required
+                >
+                <!-- Mensagem de erro da senha -->
+                <div class="error-message" id="passwordError"></div>
+            </div>
+            
+            <!-- Botão de login -->
+            <button type="submit" class="login-button">Entrar</button>
+            
+            <!-- Mensagem de sucesso -->
+            <div class="success-message" id="successMessage">
+                Login realizado com sucesso!
+            </div>
+        </form>
+        
+        <!-- Link para senha esquecida -->
+        <a href="#" class="forgot-password">Esqueceu sua senha?</a>
+        
+        <!-- Divider (linha separadora com "ou") -->
+        <div class="divider">
+            <span>ou</span>
+        </div>
+        
+        <!-- Link para cadastro -->
+        <p class="signup-link">
+            Não tem uma conta? <a href="#" id="signupLink">Cadastre-se</a>
+        </p>
+    </div>
+
+    <!--SCRIPT DE INTERAÇÃO-->
+    <script>
+        // Pega elementos do DOM para manipulação
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        const successMessage = document.getElementById('successMessage');
+        const signupLink = document.getElementById('signupLink');
+
+        // FUNÇÃO: VALIDAR EMAIL
+        function validateEmail(email) {
+            // Regex básico para validar email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email); // Retorna true se email válido
+        }
+
+        // FUNÇÃO: MOSTRAR MENSAGEM DE ERRO
+        function showError(element, message) {
+            element.textContent = message;   // Define mensagem
+            element.style.display = 'block'; // Exibe elemento
+        }
+
+        // FUNÇÃO: LIMPAR TODAS AS MENSAGENS
+        function clearErrors() {
+            emailError.style.display = 'none';
+            passwordError.style.display = 'none';
+            successMessage.style.display = 'none';
+        }
+
+        // FUNÇÃO: MOSTRAR SUCESSO
+        function showSuccess() {
+            clearErrors();                  // Limpa erros antes
+            successMessage.style.display = 'block'; // Exibe mensagem
+        }
+
+        // VALIDAÇÃO EM TEMPO REAL (BLUR)
+        emailInput.addEventListener('blur', function() {
+            if (this.value && !validateEmail(this.value)) {
+                showError(emailError, 'Por favor, insira um e-mail válido');
+            } else {
+                emailError.style.display = 'none';
+            }
+        });
+
+        passwordInput.addEventListener('blur', function() {
+            if (this.value && this.value.length < 6) {
+                showError(passwordError, 'A senha deve ter pelo menos 6 caracteres');
+            } else {
+                passwordError.style.display = 'none';
+            }
+        });
+
+        // MANIPULADOR DO FORMULÁRIO DE LOGIN
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Impede envio padrão do formulário
+            
+            clearErrors();      // Limpa mensagens anteriores
+            
+            const email = emailInput.value.trim();  // Remove espaços
+            const password = passwordInput.value;
+            
+            let hasErrors = false;
+            
+            // Valida email
+            if (!email) {
+                showError(emailError, 'E-mail é obrigatório');
+                hasErrors = true;
+            } else if (!validateEmail(email)) {
+                showError(emailError, 'Por favor, insira um e-mail válido');
+                hasErrors = true;
+            }
+            
+            // Valida senha
+            if (!password) {
+                showError(passwordError, 'Senha é obrigatória');
+                hasErrors = true;
+            } else if (password.length < 6) {
+                showError(passwordError, 'A senha deve ter pelo menos 6 caracteres');
+                hasErrors = true;
+            }
+            
+            // Se não houver erros, simula login
+            if (!hasErrors) {
+                const button = document.querySelector('.login-button');
+                const originalText = button.textContent;
+                button.textContent = 'Entrando...';
+                button.disabled = true;
+                
+                // Simula chamada de API com delay
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.disabled = false;
+                    showSuccess();
+                    
+                    console.log('Login realizado:', { email, password });
+                    window.location.href = "index.html";
+                }, 2000);
+            }
+        });
+
+        // LINK DE CADASTRO
+        signupLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Redirecionando para página de cadastro...');
+            // Aqui você poderia redirecionar para a página real de cadastro
+        });
+
+        // EFEITOS DE FOCO NOS INPUTS
+        const inputs = document.querySelectorAll('.input-field');
+        inputs.forEach(input => {
+            // Aumenta ligeiramente o tamanho do input quando focado
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+            });
+            
+            // Volta ao tamanho normal ao perder foco
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Define a codificação de caracteres da página -->
+  <meta charset="UTF-8"/>
+  <!-- Define a viewport para responsividade em dispositivos móveis -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Título da aba do navegador -->
+  <title>MyILove - Fotos</title>
+  <!-- Importa o arquivo CSS principal -->
+  <link rel="stylesheet" href="style.css"/>
+  <!-- Biblioteca de ícones Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Container principal da aplicação -->
+  <div class="container">
+
+    <!-- Sidebar de navegação lateral -->
+    <nav class="sidebar">
+      <h2>MyILove 💕</h2>
+      <ul>
+        <!-- Cada item de menu possui um ícone e um link -->
+        <li><a href="index.html"><i data-lucide="home"></i> Início</a></li>
+        <li><a href="eventos.html"><i data-lucide="calendar"></i> Eventos</a></li>
+        <li><a href="desejos.html"><i data-lucide="heart"></i> Desejos</a></li>
+        <li><a href="anotacoes.html"><i data-lucide="file-text"></i> Anotações</a></li>
+        <li><a href="fotos.html"><i data-lucide="camera"></i> Fotos</a></li>
+        <li><a href="viagens.html"><i data-lucide="map"></i> Viagens</a></li>
+        <li><a href="realizadas.html"><i data-lucide="check-circle"></i> Realizadas</a></li>
+        <li><a href="config.html"><i data-lucide="settings"></i> Configurações</a></li>
+      </ul>
+    </nav>
+
+    <!-- Conteúdo principal da página -->
+    <main class="content">
+
+      <!-- Cabeçalho da página com título e botão de adicionar foto -->
+      <div class="page-header">
+        <h2>Galeria de Fotos 📸</h2>
+        <!-- Botão abre modal para adicionar nova foto -->
+        <button class="add-btn" onclick="openPhotoModal()">
+          <i data-lucide="plus"></i> Adicionar Foto
+        </button>
+      </div>
+
+      <!-- Estatísticas da galeria de fotos -->
+      <div class="gallery-stats">
+        <div class="stat-item">
+          <!-- Total de fotos, atualizado dinamicamente via JS -->
+          <span id="totalPhotos">0</span>
+          <p>Total de fotos</p>
+        </div>
+        <div class="stat-item">
+          <!-- Total de álbuns, se houver organização por álbuns -->
+          <span id="totalAlbums">0</span>
+          <p>Álbuns</p>
+        </div>
+        <div class="stat-item">
+          <!-- Total de fotos marcadas como favoritas -->
+          <span id="favoritesCount">0</span>
+          <p>Favoritas</p>
+        </div>
+      </div>
+
+      <!-- Filtros da galeria para exibir fotos por categoria -->
+      <div class="gallery-filter">
+        <button class="filter-btn active" onclick="filterPhotos('all')">Todas</button>
+        <button class="filter-btn" onclick="filterPhotos('selfie')">Selfies</button>
+        <button class="filter-btn" onclick="filterPhotos('date')">Encontros</button>
+        <button class="filter-btn" onclick="filterPhotos('travel')">Viagens</button>
+        <button class="filter-btn" onclick="filterPhotos('special')">Especiais</button>
+        <button class="filter-btn" onclick="filterPhotos('favorites')">Favoritas</button>
+      </div>
+
+      <!-- Grid da galeria de fotos -->
+      <div class="photos-grid" id="photosGrid">
+        <!-- Placeholder exibido quando não há fotos cadastradas -->
+        <div class="photo-placeholder">
+          <i data-lucide="camera"></i>
+          <p>Nenhuma foto ainda</p>
+          <span>Comece a criar memórias visuais do seu amor! 💕</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal para adicionar uma nova foto -->
+  <div id="photoModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Adicionar Foto</h3>
+        <!-- Botão para fechar o modal -->
+        <span class="close" onclick="closePhotoModal()">&times;</span>
+      </div>
+      <!-- Formulário de upload de foto -->
+      <form id="photoForm">
+        <div class="photo-upload">
+          <!-- Input de arquivo obrigatório -->
+          <input type="file" id="photoFile" accept="image/*" required>
+          <!-- Label estilizado para o input de arquivo -->
+          <label for="photoFile" class="upload-label">
+            <i data-lucide="upload"></i>
+            Escolher foto
+          </label>
+          <!-- Preview da imagem selecionada antes do envio -->
+          <div id="photoPreview" class="photo-preview"></div>
+        </div>
+        <!-- Campos de informações da foto -->
+        <input type="text" id="photoTitle" placeholder="Título da foto" required>
+        <textarea id="photoDescription" placeholder="Descrição ou história desta foto..."></textarea>
+        <input type="date" id="photoDate" required>
+        <select id="photoCategory" required>
+          <option value="">Categoria</option>
+          <option value="selfie">Selfie</option>
+          <option value="date">Encontro</option>
+          <option value="travel">Viagem</option>
+          <option value="special">Momento especial</option>
+        </select>
+        <input type="text" id="photoLocation" placeholder="Local (opcional)">
+        <button type="submit" class="submit-btn">Adicionar Foto</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal para visualizar foto em tamanho maior -->
+  <div id="viewModal" class="modal photo-viewer">
+    <div class="modal-content large">
+      <!-- Botão para fechar a visualização -->
+      <span class="close" onclick="closeViewModal()">&times;</span>
+      <!-- Conteúdo da foto exibida -->
+      <div id="photoViewContent"></div>
+    </div>
+  </div>
+
+  <!-- Scripts gerais e específicos -->
+  <script src="script.js"></script>
+  <script src="fotos.js"></script>
+</body>
+</html>

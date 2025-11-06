@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MyILove - Início</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- MENU LATERAL -->
+    <nav class="sidebar">
+      <h2>MyILove 💕</h2>
+      <ul>
+        <li><a href="index.html"><i data-lucide="home"></i> Início</a></li>
+        <li><a href="eventos.html"><i data-lucide="calendar"></i> Eventos</a></li>
+        <li><a href="desejos.html"><i data-lucide="heart"></i> Desejos</a></li>
+        <li><a href="anotacoes.html"><i data-lucide="file-text"></i> Anotações</a></li>
+        <li><a href="fotos.html"><i data-lucide="camera"></i> Fotos</a></li>
+        <li><a href="viagens.html"><i data-lucide="map"></i> Viagens</a></li>
+        <li><a href="realizadas.html"><i data-lucide="check-circle"></i> Realizadas</a></li>
+        <li><a href="config.html"><i data-lucide="settings"></i> Configurações</a></li>
+      </ul>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="content dashboard">
+      <!-- Cartão de boas-vindas -->
+      <div class="welcome-card">
+        <h2>Bem-vindos ao MyILove 💖</h2>
+        <p>Seu espaço especial para planejar e registrar momentos únicos juntos.</p>
+      </div>
+
+      <!-- Estatísticas rápidas da conta (ADICIONADOS IDs aos spans) -->
+      <div class="stats">
+        <div class="stat-card"><span id="countEventos">0</span><p>Eventos</p></div>
+        <div class="stat-card"><span id="countDesejos">0</span><p>Desejos</p></div>
+        <div class="stat-card"><span id="countAnotacoes">0</span><p>Anotações</p></div>
+        <div class="stat-card"><span id="countFotos">0</span><p>Fotos</p></div>
+        <div class="stat-card"><span id="countViagens">0</span><p>Viagens</p></div>
+        <div class="stat-card"><span id="countRealizadas">0</span><p>Realizadas</p></div>
+      </div>
+
+      <!-- Ações rápidas -->
+      <div class="quick-actions">
+        <h3>Ações Rápidas</h3>
+        <div class="buttons">
+          <button class="blue"><i data-lucide="plus"></i> Novo Evento</button>
+          <button class="pink"><i data-lucide="heart"></i> Adicionar Desejo</button>
+          <button class="purple"><i data-lucide="file-text"></i> Nova Anotação</button>
+          <button class="green"><i data-lucide="camera"></i> Adicionar Foto</button>
+        </div>
+      </div>
+
+      <!-- Próximos eventos -->
+      <div class="next-events">
+        <h3>Próximos Eventos</h3>
+        <p>Nenhum evento próximo. Que tal planejar algo especial? 💐</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts globais -->
+  <script src="script.js"></script>
+  <!-- Importa também os módulos que possuem as funções chamadas -->
+  <script src="eventos.js"></script>
+  <script src="desejos.js"></script>
+  <script src="anotacoes.js"></script>
+  <script src="fotos.js"></script>
+</body>
+</html>

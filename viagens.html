@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MyILove - Viagens</title>
+  <!-- Link para o arquivo de estilos principal -->
+  <link rel="stylesheet" href="style.css"/>
+  <!-- Biblioteca de ícones Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="container">
+    <!--MENU LATERAL-->
+    <nav class="sidebar">
+      <h2>MyILove 💕</h2>
+      <ul>
+        <!-- Links do menu lateral -->
+        <li><a href="index.html"><i data-lucide="home"></i> Início</a></li>
+        <li><a href="eventos.html"><i data-lucide="calendar"></i> Eventos</a></li>
+        <li><a href="desejos.html"><i data-lucide="heart"></i> Desejos</a></li>
+        <li><a href="anotacoes.html"><i data-lucide="file-text"></i> Anotações</a></li>
+        <li><a href="fotos.html"><i data-lucide="camera"></i> Fotos</a></li>
+        <li><a href="viagens.html"><i data-lucide="map"></i> Viagens</a></li>
+        <li><a href="realizadas.html"><i data-lucide="check-circle"></i> Realizadas</a></li>
+        <li><a href="config.html"><i data-lucide="settings"></i> Configurações</a></li>
+      </ul>
+    </nav>
+
+    <!--CONTEÚDO PRINCIPAL-->
+    <main class="content">
+      <!-- Cabeçalho da página -->
+      <div class="page-header">
+        <h2>Nossas Viagens ✈️</h2>
+        <!-- Botão para abrir modal de nova viagem -->
+        <button class="add-btn" onclick="openTripModal()">
+          <i data-lucide="plus"></i> Nova Viagem
+        </button>
+      </div>
+
+      <!-- Estatísticas gerais das viagens -->
+      <div class="trip-stats">
+        <div class="stat-item">
+          <span id="totalTrips">0</span>
+          <p>Viagens</p>
+        </div>
+        <div class="stat-item">
+          <span id="totalDestinations">0</span>
+          <p>Destinos</p>
+        </div>
+        <div class="stat-item">
+          <span id="totalDays">0</span>
+          <p>Dias viajando</p>
+        </div>
+      </div>
+
+      <!-- Tabs para alternar entre tipos de viagens -->
+      <div class="trip-tabs">
+        <button class="tab-btn active" onclick="showTab('planned')">Planejadas</button>
+        <button class="tab-btn" onclick="showTab('current')">Em andamento</button>
+        <button class="tab-btn" onclick="showTab('completed')">Realizadas</button>
+      </div>
+
+      <!--SEÇÃO DE VIAGENS PLANEJADAS-->
+      <div id="plannedTrips" class="trip-section active">
+        <div class="trips-grid" id="plannedGrid">
+          <p class="empty-state">Nenhuma viagem planejada. Que tal planejar uma escapada romântica? 🌍</p>
+        </div>
+      </div>
+
+      <!--SEÇÃO DE VIAGENS EM ANDAMENTO-->
+      <div id="currentTrips" class="trip-section">
+        <div class="trips-grid" id="currentGrid">
+          <p class="empty-state">Nenhuma viagem em andamento.</p>
+        </div>
+      </div>
+
+      <!--SEÇÃO DE VIAGENS REALIZADAS-->
+      <div id="completedTrips" class="trip-section">
+        <div class="trips-grid" id="completedGrid">
+          <p class="empty-state">Nenhuma viagem realizada ainda.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!--MODAL PARA CRIAR NOVA VIAGEM-->
+  <div id="tripModal" class="modal">
+    <div class="modal-content large">
+      <div class="modal-header">
+        <h3>Nova Viagem</h3>
+        <!-- Botão de fechar modal -->
+        <span class="close" onclick="closeTripModal()">&times;</span>
+      </div>
+      <form id="tripForm">
+        <!-- Campos do formulário -->
+        <input type="text" id="tripDestination" placeholder="Destino" required>
+        <div class="form-row">
+          <input type="date" id="tripStartDate" required>
+          <input type="date" id="tripEndDate" required>
+        </div>
+        <textarea id="tripDescription" placeholder="Descrição da viagem..."></textarea>
+        <select id="tripType">
+          <option value="romantic">Romântica</option>
+          <option value="adventure">Aventura</option>
+          <option value="relax">Relaxante</option>
+          <option value="cultural">Cultural</option>
+          <option value="family">Família</option>
+        </select>
+        <input type="text" id="tripBudget" placeholder="Orçamento estimado (opcional)">
+        <textarea id="tripNotes" placeholder="Notas e planejamento..."></textarea>
+        <button type="submit" class="submit-btn">Criar Viagem</button>
+      </form>
+    </div>
+  </div>
+
+
+      <!--MODAL PARA DETALHES DE UMA VIAGEM-->
+  <div id="tripDetailsModal" class="modal">
+    <div class="modal-content large">
+      <div class="modal-header">
+        <h3 id="tripDetailsTitle"></h3>
+        <span class="close" onclick="closeTripDetailsModal()">&times;</span>
+      </div>
+      <div id="tripDetailsContent"></div>
+    </div>
+  </div>
+
+  <!-- Scripts principais -->
+  <script src="script.js"></script>
+  <script src="viagens.js"></script>
+</body>
+</html>

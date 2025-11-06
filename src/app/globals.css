@@ -1,0 +1,1003 @@
+/* Reset básico */
+/* Aqui a gente começa "zerando" o estilo padrão do navegador.
+   Isso evita margens, paddings e comportamentos inesperados. */
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; /* Faz com que width/height incluam padding e border */
+}
+
+/* Definição de variáveis CSS (cores e estilos principais).
+   Assim fica fácil trocar cores e manter consistência no design. */
+:root{
+  --bg: #faf9fb;           /* fundo geral da página */
+  --card: #ffffff;         /* fundo dos cards */
+  --text: #333333;         /* cor padrão do texto */
+  --muted: #555555;        /* cor mais apagada, usada no menu */
+  --line: #eee;            /* linhas e bordas suaves */
+  --pink: #d63384;         /* cor rosa destaque (principal) */
+  --purple: #7a3cff;       /* cor roxa destaque */
+  --hover: #ffe6f0;        /* fundo rosado quando passa o mouse */
+  --sidebar: #ffffff;      /* fundo padrão da sidebar */
+  --sidebar-soft: #fff5f8; /* alternativa de sidebar mais "romântica" */
+}
+
+/* Garante que html e body ocupem a tela inteira */
+html, body { height: 100%; }
+
+/* Estilos gerais do body */
+body {
+  font-family: Arial, Helvetica, sans-serif; /* fonte simples e universal */
+  background: var(--bg);   /* usa o fundo definido na var */
+  color: var(--text);      /* cor padrão do texto */
+}
+
+/*LAYOUT PRINCIPAL*/
+.container { 
+  display: flex;        /* layout flexível */
+  height: 100vh;        /* ocupa altura inteira da tela */
+  width: 100%; 
+}
+
+/*SIDEBAR (menu lateral)*/
+.sidebar {
+  width: 240px;                 /* largura fixa */
+  background: var(--sidebar);   /* cor de fundo */
+  border-right: 1px solid var(--line); /* separação sutil do conteúdo */
+  padding: 20px;                /* respiro interno */
+  overflow-y: auto;             /* caso tenha muitos itens, rola verticalmente */
+}
+
+.sidebar h2 {
+  text-align: center;    /* centraliza título */
+  margin-bottom: 24px;   /* espaço embaixo */
+  color: var(--pink);    /* rosa destaque */
+}
+
+/* Remove marcadores e organiza itens de menu em coluna */
+.sidebar ul { 
+  list-style: none; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 6px; /* espacinho entre os itens */
+}
+
+/* Links do menu */
+.sidebar a {
+  display: flex; 
+  align-items: center; 
+  gap: 10px;                     /* ícone + texto com espaçamento */
+  text-decoration: none;         /* sem sublinhado */
+  color: var(--muted);           /* cor "apagada" padrão */
+  font-weight: 500; 
+  padding: 10px 12px;            /* área de clique confortável */
+  border-radius: 10px; 
+  transition: background .25s, color .25s; /* animação suave ao interagir */
+}
+
+/* Estado hover (passar mouse) ou ativo (página atual) */
+.sidebar a:hover,
+.sidebar a.active {
+  background: var(--hover);  /* fundo suave rosado */
+  color: var(--pink);        /* texto fica rosa destaque */
+}
+
+/* Ícones da sidebar */
+.sidebar i { 
+  width: 20px; 
+  height: 20px; 
+}
+
+/*ÁREA DE CONTEÚDO*/
+.content {
+  flex: 1;                   /* ocupa todo espaço restante */
+  padding: 28px;             /* espaçamento interno */
+  overflow-y: auto;          /* conteúdo rolável se for longo */
+  display: flex; 
+  flex-direction: column; 
+  gap: 18px;                 /* espaço entre blocos */
+}
+
+h2 { color: var(--purple); margin-bottom: 6px; }
+h3 { color: var(--text); margin-bottom: 10px; }
+
+/*CARDS GENÉRICOS*/
+.card, .welcome-card, .next-events {
+  background: var(--card);                  /* fundo branco */
+  border-radius: 12px;                      /* cantos arredondados */
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);    /* sombra leve */
+  padding: 18px;                            /* respiro interno */
+}
+
+/* Dashboard com espaçamento entre elementos */
+.dashboard { gap: 20px; }
+
+/* Título do card de boas-vindas em rosa */
+.welcome-card h2 { color: var(--pink); }
+
+/*ESTATÍSTICAS*/
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); /* layout responsivo */
+  gap: 14px;
+}
+.stat-card {
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+  padding: 16px;
+  text-align: center; /* tudo centralizado */
+}
+.stat-card span {
+  font-size: 24px;        /* destaque no número */
+  font-weight: 700; 
+  color: var(--purple);   /* número roxo destaque */
+  display: block; 
+}
+
+/*AÇÕES RÁPIDAS*/
+.quick-actions .buttons {
+  display: flex;
+  flex-wrap: wrap; /* quebra linha quando não cabe */
+  gap: 12px;
+}
+
+.quick-actions button {
+  flex: 1;                  /* todos botões ocupam espaço igual */
+  min-width: 180px;         /* mas não ficam menores que isso */
+  padding: 12px;
+  border: 0;
+  border-radius: 12px;
+  color: #fff;              /* texto branco */
+  font-weight: 700;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: transform .15s ease; /* efeito suave ao interagir */
+}
+
+/* Leve "zoom" quando passa o mouse */
+.quick-actions button:hover { transform: scale(1.03); }
+
+/* Botões com cores diferentes para dar variedade de ações */
+button.blue   { background-color:#007bff; }
+button.pink   { background-color: #ff4fa0; }
+button.purple { background-color:#7a3cff; }
+button.green  { background-color:#28a745; }
+
+/*CABEÇALHO DAS PÁGINAS*/
+.page-header {
+  display: flex;                          /* organiza conteúdo em linha (flexbox) */
+  justify-content: space-between;         /* espaço máximo entre elementos (ex: título e botão) */
+  align-items: center;                    /* alinha verticalmente no centro */
+  margin-bottom: 20px;                    /* dá respiro abaixo do cabeçalho */
+}
+
+/* Botão de adicionar (ex: "Adicionar Evento", "Adicionar Nota") */
+.add-btn {
+  background: var(--pink);                /* fundo rosa destaque */
+  color: white;                           /* texto branco */
+  border: none;                           /* sem borda */
+  padding: 10px 16px;                     /* espaço interno confortável */
+  border-radius: 8px;                     /* cantos arredondados */
+  cursor: pointer;                        /* cursor vira "mãozinha" */
+  display: flex;                          /* permite ícone + texto lado a lado */
+  align-items: center;
+  gap: 8px;                               /* espaço entre ícone e texto */
+  font-weight: 600;                       /* texto mais forte */
+  transition: transform 0.2s;             /* animação suave ao interagir */
+}
+
+/* Quando o usuário passa o mouse no botão */
+.add-btn:hover {
+  transform: translateY(-2px);            /* botão "sobe" levemente */
+  box-shadow: 0 4px 12px rgba(214, 51, 132, 0.3); /* adiciona sombra rosa suave */
+}
+
+/*MODAIS (caixas de diálogo)*/
+.modal {
+  display: none;                          /* começa escondido */
+  position: fixed;                        /* fica fixo na tela, mesmo rolando */
+  z-index: 1000;                          /* fica acima de outros elementos */
+  left: 0;
+  top: 0;
+  width: 100%;                            /* ocupa largura total da tela */
+  height: 100%;                           /* ocupa altura total da tela */
+  background-color: rgba(0,0,0,0.5);      /* fundo escuro semi-transparente */
+  align-items: center;                    /* centraliza verticalmente o conteúdo */
+  justify-content: center;                /* centraliza horizontalmente */
+}
+
+/* Conteúdo da modal (a caixa branca no centro) */
+.modal-content {
+  background: white;                      /* fundo branco */
+  border-radius: 12px;                    /* cantos arredondados */
+  width: 90%;                             /* ocupa 90% da tela (responsivo) */
+  max-width: 500px;                       /* mas nunca passa de 500px */
+  max-height: 90vh;                       /* nunca passa de 90% da altura da tela */
+  overflow-y: auto;                       /* se o conteúdo for muito, ativa scroll interno */
+}
+
+/* Versão maior da modal (quando necessário mais espaço) */
+.modal-content.large {
+  max-width: 700px;                       /* aumenta limite para 700px */
+}
+
+/* Cabeçalho dentro da modal (título + botão fechar) */
+.modal-header {
+  display: flex;                          /* organiza título e botão em linha */
+  justify-content: space-between;         /* título à esquerda, "X" à direita */
+  align-items: center;                    
+  padding: 20px;                          /* espaço interno */
+  border-bottom: 1px solid var(--line);   /* separador sutil */
+}
+
+/* Botão de fechar (o "X" no canto da modal) */
+.close {
+  font-size: 28px;                        /* tamanho grande */
+  font-weight: bold;                      /* mais destacado */
+  cursor: pointer;                        /* cursor de clique */
+  color: #999;                            /* cinza apagado */
+}
+
+/* Quando passa o mouse no "X" */
+.close:hover {
+  color: #333;                            /* fica mais escuro, destacando a ação */
+}
+
+
+/*FORMULÁRIOS*/
+form {
+  padding: 20px;                       /* espaço interno para o conteúdo não grudar nas bordas */
+  display: flex;                       /* organiza os campos usando flexbox */
+  flex-direction: column;              /* campos ficam empilhados em coluna */
+  gap: 15px;                           /* espaço entre cada campo */
+}
+
+input, textarea, select {
+  padding: 12px;                       /* deixa o campo mais confortável para digitar */
+  border: 1px solid var(--line);       /* borda leve para destacar do fundo */
+  border-radius: 8px;                  /* cantos arredondados */
+  font-size: 14px;                     /* tamanho de texto padrão */
+}
+
+/* Linha com dois campos lado a lado */
+.form-row {
+  display: grid;                       /* usa grid layout */
+  grid-template-columns: 1fr 1fr;      /* divide a linha em 2 colunas iguais */
+  gap: 15px;                           /* espaço entre os campos */
+}
+
+/* Botão de envio */
+.submit-btn {
+  background: var(--purple);           /* fundo roxo destaque */
+  color: white;                        /* texto branco */
+  border: none;                        /* remove borda padrão */
+  padding: 12px;                       /* espaço interno */
+  border-radius: 8px;                  /* cantos arredondados */
+  font-weight: 600;                    /* texto em destaque */
+  cursor: pointer;                     /* vira "mãozinha" ao passar o mouse */
+}
+
+/*CALENDÁRIO*/
+.calendar-view {
+  background: var(--card);             /* fundo branco (card) */
+  border-radius: 12px;                 /* cantos arredondados */
+  padding: 20px;                       /* respiro interno */
+  box-shadow: 0 2px 6px rgba(0,0,0,.05); /* sombra leve para destacar */
+}
+
+/* Cabeçalho do calendário (mês atual + botões de navegação) */
+.calendar-header {
+  display: flex;                       /* organiza em linha */
+  justify-content: space-between;      /* mês à esquerda, botões à direita */
+  align-items: center;                 /* alinha tudo verticalmente */
+  margin-bottom: 20px;                 /* espaço abaixo */
+}
+
+.calendar-header button {
+  background: none;                    /* sem fundo */
+  border: none;                        /* sem borda */
+  font-size: 20px;                     /* ícones/setas maiores */
+  cursor: pointer;                     /* clicável */
+  padding: 5px;                        /* aumenta área de clique */
+  border-radius: 5px;                  /* deixa botão arredondado */
+}
+
+/* Grade com os dias da semana + dias do mês */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 colunas, uma para cada dia da semana */
+  gap: 1px;                              /* separação entre os quadradinhos */
+  background: var(--line);               /* linhas divisórias */
+}
+
+/* Cabeçalho dos dias da semana (Dom, Seg, Ter...) */
+.calendar-day-header {
+  background: var(--bg);                /* fundo diferente para destacar */
+  padding: 10px;                        /* espaço interno */
+  text-align: center;                   /* centraliza texto */
+  font-weight: 600;                     /* texto em negrito */
+  color: var(--muted);                  /* cor cinza mais suave */
+}
+
+/* Cada quadradinho de dia */
+.calendar-day {
+  background: white;                    /* fundo branco padrão */
+  padding: 15px 10px;                   /* espaço interno */
+  text-align: center;                   /* número do dia centralizado */
+  cursor: pointer;                      /* mostra que é interativo */
+  min-height: 60px;                     /* altura mínima, mantém tamanho consistente */
+  display: flex;                        /* para alinhar o conteúdo no centro */
+  align-items: center;
+  justify-content: center;
+}
+
+/* Quando o usuário passa o mouse em um dia */
+.calendar-day:hover {
+  background: var(--hover);             /* muda fundo para indicar interação */
+}
+
+/* Dias de outros meses (cinza apagado) */
+.calendar-day.other-month {
+  color: #ccc;
+}
+
+/* O dia de hoje */
+.calendar-day.today {
+  background: var(--pink);              /* destaque rosa */
+  color: white;                         /* texto branco */
+  font-weight: bold;                    /* texto em negrito */
+}
+
+/* Dias que têm eventos */
+.calendar-day.has-event {
+  background: var(--purple);            /* destaque roxo */
+  color: white;                         /* texto branco */
+}
+
+
+/*EVENTOS*/
+.events-list {
+  background: var(--card);                     /* fundo branco padrão de "cartão" */
+  border-radius: 12px;                         /* cantos arredondados */
+  padding: 20px;                               /* espaço interno */
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);       /* sombra leve para destacar */
+}
+
+.event-item {
+  display: flex;                               /* coloca ícone + detalhes + botão lado a lado */
+  align-items: center;                         /* centraliza tudo verticalmente */
+  gap: 15px;                                   /* espaço entre os elementos */
+  padding: 15px;                               /* respiro interno */
+  border: 1px solid var(--line);               /* borda clara para separar eventos */
+  border-radius: 8px;                          /* cantos arredondados */
+  margin-bottom: 10px;                         /* espaço entre eventos na lista */
+}
+
+.event-icon {
+  font-size: 24px;                             /* ícone maior para chamar atenção */
+}
+
+.event-details {
+  flex: 1;                                     /* ocupa todo espaço disponível */
+}
+
+.event-details h4 {
+  margin-bottom: 5px;                          /* separa título da data */
+}
+
+.event-date {
+  color: var(--muted);                         /* cor cinza suave */
+  font-size: 14px;                             /* tamanho menor, menos destaque */
+}
+
+.delete-btn {
+  background: none;                            /* sem fundo */
+  border: none;                                /* sem borda */
+  color: #ff6b6b;                              /* vermelho para indicar ação de excluir */
+  cursor: pointer;                             /* botão interativo */
+  padding: 5px;                                /* área de clique maior */
+}
+
+/*DESEJOS / FILTROS*/
+.wish-categories, .notes-filter, .gallery-filter {
+  margin-bottom: 20px;                         /* separação das seções */
+}
+
+.category-filter {
+  display: flex;                               /* organiza botões lado a lado */
+  gap: 10px;                                   /* espaço entre eles */
+  flex-wrap: wrap;                             /* quebra linha se faltar espaço */
+}
+
+.filter-btn {
+  padding: 8px 16px;                           /* área confortável para clique */
+  border: 1px solid var(--line);               /* borda clara */
+  background: white;                           /* fundo branco */
+  border-radius: 20px;                         /* cantos bem arredondados estilo "pílula" */
+  cursor: pointer;                             /* clicável */
+  transition: all 0.2s;                        /* anima suavizada ao ativar/desativar */
+}
+
+.filter-btn.active {
+  background: var(--pink);                     /* destaque rosa */
+  color: white;                                /* texto branco */
+  border-color: var(--pink);                   /* borda no mesmo tom */
+}
+
+/*CARDS DESEJOS / ANOTAÇÕES*/
+.wishes-grid, .notes-grid {
+  display: grid;                               /* layout em grade */
+  grid-template-columns: repeat(auto-fill, 
+    minmax(300px, 1fr));                       /* se adapta ao tamanho da tela */
+  gap: 20px;                                   /* espaço entre os cards */
+}
+
+.wish-card, .note-card {
+  background: var(--card);                     /* fundo branco padrão */
+  border-radius: 12px;                         /* cantos arredondados */
+  padding: 20px;                               /* respiro interno */
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);       /* sombra leve */
+  position: relative;                          /* necessário para posicionar os botões no canto */
+}
+
+.wish-header {
+  display: flex;                               /* título + ações lado a lado */
+  justify-content: space-between;              /* título à esquerda, ações à direita */
+  margin-bottom: 15px;                         /* separação do conteúdo abaixo */
+}
+
+/* Ações dentro dos cards (ex: editar, excluir, concluir) */
+.wish-actions, .note-actions {
+  display: flex;                               /* botões lado a lado */
+  gap: 5px;                                    /* espaço entre botões */
+  position: absolute;                          /* fixados no canto */
+  top: 10px;                                   /* distância do topo */
+  right: 10px;                                 /* distância da direita */
+}
+
+.complete-btn {
+  background: var(--green);                    /* verde para simbolizar "feito" */
+  color: white;                                /* texto branco */
+  border: none;                                /* sem borda */
+  padding: 5px;                                /* área de clique */
+  border-radius: 4px;                          /* cantos levemente arredondados */
+  cursor: pointer;                             /* interativo */
+}
+
+
+/*ANOTAÇÕES*/
+.search-bar {
+  position: relative;                          /* permite posicionar o ícone dentro do input */
+  margin-bottom: 20px;                         /* espaço abaixo para separar de outros elementos */
+}
+
+.search-bar input {
+  width: 100%;                                 /* ocupa toda a largura disponível */
+  padding-right: 40px;                         /* deixa espaço à direita para o ícone não ficar em cima do texto */
+}
+
+.search-bar i {
+  position: absolute;                          /* ícone posicionado dentro da barra de busca */
+  right: 12px;                                 /* encostado à direita */
+  top: 50%;                                    /* centralizado verticalmente */
+  transform: translateY(-50%);                 /* ajuste fino para alinhar no meio */
+  color: var(--muted);                         /* cor discreta para não roubar atenção do input */
+}
+
+/* Seletor de humor nas anotações */
+.mood-selector {
+  display: flex;                               /* ícones e label lado a lado */
+  align-items: center;                         /* centraliza verticalmente */
+  gap: 10px;                                   /* espaço entre eles */
+}
+
+.mood-options {
+  display: flex;                               /* coloca os ícones de humor lado a lado */
+  gap: 5px;                                    /* com pequeno espaço entre eles */
+}
+
+.mood {
+  font-size: 24px;                             /* ícones grandes de emoção */
+  cursor: pointer;                             /* deixa clicável */
+  padding: 5px;                                /* aumenta área de clique */
+  border-radius: 50%;                          /* formato circular */
+  transition: transform 0.2s;                  /* animação suave ao passar o mouse */
+}
+
+.mood:hover {
+  transform: scale(1.2);                       /* cresce um pouco no hover, destacando */
+}
+
+.mood.selected {
+  background: var(--hover);                    /* marca o humor escolhido com fundo leve */
+}
+
+/*FOTOS / GALERIA*/
+.gallery-stats, .trip-stats {
+  display: grid;                               /* organiza estatísticas em grid */
+  grid-template-columns: repeat(auto-fit, 
+    minmax(120px, 1fr));                       /* se adapta ao tamanho da tela */
+  gap: 15px;                                   /* espaço entre os cards */
+  margin-bottom: 20px;                         /* separa da galeria abaixo */
+}
+
+.stat-item {
+  background: var(--card);                     /* fundo branco tipo "cartão" */
+  padding: 15px;                               /* espaço interno */
+  border-radius: 8px;                          /* cantos arredondados */
+  text-align: center;                          /* centraliza textos/números */
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);       /* sombra leve */
+}
+
+.stat-item span {
+  font-size: 24px;                             /* número grande */
+  font-weight: bold;                           /* em negrito */
+  color: var(--purple);                        /* cor de destaque */
+  display: block;                              /* quebra linha */
+}
+
+/* Grade de fotos */
+.photos-grid {
+  display: grid;                               /* organiza fotos em grid */
+  grid-template-columns: repeat(auto-fill, 
+    minmax(250px, 1fr));                       /* se ajusta automaticamente à tela */
+  gap: 20px;                                   /* espaço entre as fotos */
+}
+
+.photo-item {
+  background: var(--card);                     /* fundo branco */
+  border-radius: 12px;                         /* bordas arredondadas */
+  overflow: hidden;                            /* esconde partes que passam do card */
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);       /* sombra leve */
+  cursor: pointer;                             /* indica interatividade */
+  transition: transform 0.2s;                  /* animação ao passar o mouse */
+}
+
+.photo-item:hover {
+  transform: translateY(-5px);                 /* levanta o card no hover */
+}
+
+.photo-image {
+  position: relative;                          /* necessário para overlay */
+  height: 200px;                               /* altura fixa para padronizar */
+  overflow: hidden;                            /* corta excessos da imagem */
+}
+
+.photo-image img {
+  width: 100%;                                 /* ocupa toda a largura */
+  height: 100%;                                /* ocupa toda a altura */
+  object-fit: cover;                           /* corta/ajusta mantendo proporção */
+}
+
+.photo-overlay {
+  position: absolute;                          /* camada sobre a foto */
+  top: 0; left: 0; right: 0; bottom: 0;        /* cobre toda a imagem */
+  background: rgba(0,0,0,0.5);                 /* fundo escuro semi-transparente */
+  opacity: 0;                                  /* começa invisível */
+  transition: opacity 0.2s;                    /* aparece suavemente */
+  display: flex;                               /* centraliza conteúdo interno */
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-item:hover .photo-overlay {
+  opacity: 1;                                  /* aparece só no hover */
+}
+
+.photo-actions {
+  display: flex;                               /* botões lado a lado */
+  gap: 10px;                                   /* espaço entre eles */
+}
+
+.favorite-btn.active {
+  color: #ff6b6b;                              /* coração vermelho quando marcado */
+}
+
+.photo-info {
+  padding: 15px;                               /* legenda/descrição da foto */
+}
+
+.photo-placeholder {
+  grid-column: 1 / -1;                         /* ocupa toda a largura da grade */
+  text-align: center;                          /* centraliza texto e ícone */
+  padding: 60px 20px;                          /* bastante espaço para destaque */
+  color: var(--muted);                         /* cor mais clara */
+}
+
+.photo-placeholder i {
+  font-size: 48px;                             /* ícone grande para chamar atenção */
+  margin-bottom: 15px;                         /* espaço abaixo */
+  display: block;                              /* quebra de linha */
+}
+
+
+/*VIAGENS*/
+
+/* Container de abas (tabs) de navegação entre diferentes seções da área de viagens */
+.trip-tabs {
+  display: flex;            /* Coloca os botões lado a lado */
+  gap: 5px;                 /* Espaçamento entre as abas */
+  margin-bottom: 20px;      /* Distância da próxima seção */
+  background: var(--line);  /* Fundo neutro usando cor da paleta */
+  border-radius: 8px;       /* Bordas arredondadas para suavidade */
+  padding: 5px;             /* Espaçamento interno */
+}
+
+/* Botões das abas (tabs) */
+.tab-btn {
+  flex: 1;                  /* Cada botão ocupa o mesmo espaço dentro do flex */
+  padding: 10px;            /* Área clicável confortável */
+  border: none;             /* Remove a borda padrão do botão */
+  background: transparent;  /* Fundo transparente por padrão */
+  border-radius: 6px;       /* Bordas levemente arredondadas */
+  cursor: pointer;          /* Mostra que o botão é interativo */
+  transition: all 0.2s;     /* Suaviza as animações ao mudar de estado */
+}
+
+/* Aba ativa (selecionada pelo usuário) */
+.tab-btn.active {
+  background: white;                              /* Destaca a aba ativa */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);          /* Leve sombra para sensação de "elevado" */
+}
+
+/* Cada seção de conteúdo associada a uma aba */
+.trip-section {
+  display: none;            /* Escondida por padrão */
+}
+
+/* Apenas a aba ativa exibe seu conteúdo */
+.trip-section.active {
+  display: block;           /* Torna visível */
+}
+
+/* Grade que organiza os cartões de viagens */
+.trips-grid {
+  display: grid;                                          /* Layout em grid */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  /* Distribui os cartões automaticamente:
+     - cada cartão terá no mínimo 300px
+     - se couberem mais, o espaço é dividido igualmente */
+  gap: 20px;                                              /* Espaçamento entre cartões */
+}
+
+/* Cartão individual de uma viagem */
+.trip-card {
+  background: var(--card);                                /* Fundo no estilo de card */
+  border-radius: 12px;                                    /* Bordas arredondadas */
+  padding: 20px;                                          /* Espaçamento interno */
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);                  /* Sombra leve */
+  cursor: pointer;                                        /* Indicador de interação */
+  transition: transform 0.2s;                             /* Animação suave no hover */
+  position: relative;                                     /* Para posicionar elementos absolutos */
+}
+
+/* Efeito hover nos cartões */
+.trip-card:hover {
+  transform: translateY(-5px);                            /* Elevação ao passar o mouse */
+}
+
+/* Cabeçalho de cada cartão de viagem */
+.trip-header {
+  display: flex;                                          /* Layout flexível */
+  justify-content: space-between;                         /* Espaço entre título e ações */
+  margin-bottom: 15px;                                    /* Separação do conteúdo */
+}
+
+/*VIAGENS REALIZADAS*/
+
+/* Estatísticas gerais das viagens realizadas */
+.achievements-stats {
+  display: grid;                                          /* Layout em grade */
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  /* Cada item terá no mínimo 120px, ajustando conforme espaço */
+  gap: 15px;                                              /* Espaçamento entre itens */
+  margin-bottom: 30px;                                    /* Espaçamento externo */
+}
+
+/* Contador de conquistas (ex: número de viagens concluídas) */
+.achievement-counter {
+  background: var(--pink);                                /* Fundo chamativo */
+  color: white;                                           /* Texto branco para contraste */
+  padding: 8px 16px;                                      /* Área de destaque */
+  border-radius: 20px;                                    /* Aparência de "badge" */
+  font-weight: 600;                                       /* Texto mais marcante */
+}
+
+/* Linha do tempo das viagens */
+.timeline {
+  position: relative;                                     /* Necessário para posicionamento de itens */
+  padding: 20px 0;                                        /* Espaçamento vertical */
+}
+
+/* Item individual da timeline */
+.timeline-item {
+  display: flex;                                          /* Layout flexível */
+  margin-bottom: 30px;                                    /* Espaço entre itens */
+  cursor: pointer;                                        /* Indica interatividade */
+}
+
+/* Alinhamento à esquerda */
+.timeline-item.left {
+  justify-content: flex-start;
+}
+
+/* Alinhamento à direita */
+.timeline-item.right {
+  justify-content: flex-end;
+}
+
+/* Conteúdo dentro de cada item da timeline */
+.timeline-content {
+  background: var(--card);                                /* Fundo estilo card */
+  padding: 20px;                                          /* Espaçamento interno */
+  border-radius: 12px;                                    /* Bordas arredondadas */
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);                  /* Sombra leve */
+  max-width: 400px;                                       /* Largura máxima */
+  position: relative;                                     /* Para posicionar elementos internos */
+}
+
+/* Data exibida em cada item da timeline */
+.timeline-date {
+  position: absolute;                                     /* Sobrepõe o conteúdo */
+  top: -10px;                                             /* Fica "acima" do card */
+  left: 20px;                                             /* Alinhada à esquerda */
+  background: var(--purple);                              /* Cor de destaque */
+  color: white;                                           /* Texto branco */
+  padding: 5px 10px;                                      /* Espaço interno */
+  border-radius: 15px;                                    /* Aparência de selo */
+  font-size: 12px;                                        /* Tamanho pequeno */
+  font-weight: 600;                                       /* Texto marcante */
+}
+
+/* Pontuação ou nota de uma conquista */
+.achievement-score {
+  background: var(--pink);                                /* Cor de destaque */
+  color: white;                                           /* Contraste */
+  padding: 4px 8px;                                       /* Espaço interno */
+  border-radius: 10px;                                    /* Formato de selo */
+  font-size: 12px;                                        /* Tamanho pequeno */
+  font-weight: 600;                                       /* Negrito */
+  display: inline-block;                                  /* Ocupa apenas o necessário */
+  margin-top: 10px;                                       /* Espaçamento do conteúdo acima */
+}
+
+/*       CATEGORIAS          */
+
+/* Grade de categorias de viagens */
+.categories-grid {
+  display: grid;                                          /* Layout em grid */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  /* Ajusta conforme espaço disponível, min 200px por coluna */
+  gap: 20px;                                              /* Espaço entre cartões */
+  margin-bottom: 30px;                                    /* Espaçamento inferior */
+}
+
+/* Cartão de cada categoria */
+.category-card {
+  background: var(--card);                                /* Fundo estilo card */
+  padding: 20px;                                          /* Espaçamento interno */
+  border-radius: 12px;                                    /* Bordas arredondadas */
+  text-align: center;                                     /* Centraliza conteúdo */
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);                  /* Leve sombra */
+}
+
+/* Ícone da categoria */
+.category-icon {
+  font-size: 48px;                                        /* Ícone grande */
+  margin-bottom: 10px;                                    /* Espaço abaixo */
+}
+
+/* Número de viagens ou conquistas da categoria */
+.category-count {
+  font-size: 24px;                                        /* Texto maior */
+  font-weight: bold;                                      /* Negrito */
+  color: var(--purple);                                   /* Cor de destaque */
+}
+
+
+/*       CONFIGURAÇÕES       */
+
+/* Seção de configurações gerais */
+.config-section {
+  margin-bottom: 30px;        /* Espaço abaixo da seção para separar do próximo bloco */
+}
+
+/* Cada item de configuração individual */
+.setting-item {
+  margin-bottom: 15px;        /* Espaço entre configurações para melhor leitura */
+}
+
+/* Rótulos (labels) dos itens de configuração */
+.setting-item label {
+  display: flex;              /* Layout flexível: texto e input lado a lado */
+  align-items: center;        /* Alinha verticalmente ao centro */
+  gap: 10px;                  /* Espaçamento entre o texto e o input */
+  cursor: pointer;            /* Indica que o item é clicável */
+}
+
+/* Container da paleta de cores */
+.color-palette {
+  margin-top: 15px;           /* Espaço acima para separação do conteúdo */
+}
+
+/* Conjunto de opções de cores disponíveis */
+.color-options {
+  display: flex;              /* Coloca as cores lado a lado */
+  gap: 10px;                  /* Espaço entre cada opção */
+  margin-top: 10px;           /* Espaço acima para separar de outros elementos */
+}
+
+/* Cada círculo representando uma cor */
+.color-option {
+  width: 40px;                /* Largura fixa */
+  height: 40px;               /* Altura fixa (círculo) */
+  border-radius: 50%;         /* Formato totalmente arredondado */
+  cursor: pointer;            /* Mostra que é interativo */
+  border: 3px solid transparent; /* Borda invisível até ser ativada */
+  transition: transform 0.2s; /* Animação suave ao interagir */
+}
+
+/* Quando a cor está selecionada (ativa) */
+.color-option.active {
+  border-color: var(--text);  /* Mostra a cor da borda para indicar seleção */
+  transform: scale(1.1);      /* Leve aumento para destaque */
+}
+
+/* Opções de cores específicas com fundo fixo */
+.color-option.pink   { background: #ff4fa0; }  /* Rosa */
+.color-option.purple { background: #7a3cff; }  /* Roxo */
+.color-option.blue   { background: #007bff; }  /* Azul */
+.color-option.green  { background: #28a745; }  /* Verde */
+.color-option.red    { background: #dc3545; }  /* Vermelho */
+
+/*     AÇÕES DE DADOS        */
+
+/* Container das ações de exportar/importar/limpar */
+.data-actions {
+  display: flex;              /* Coloca os botões lado a lado */
+  gap: 10px;                  /* Espaço entre os botões */
+  flex-wrap: wrap;            /* Permite quebrar linha se não couberem */
+}
+
+/* Estilo base para os botões de ação */
+.export-btn, .import-btn, .clear-btn {
+  padding: 10px 16px;         /* Tamanho confortável de clique */
+  border: none;               /* Remove borda padrão */
+  border-radius: 8px;         /* Bordas arredondadas */
+  cursor: pointer;            /* Cursor indicando ação */
+  display: flex;              /* Ícone + texto lado a lado */
+  align-items: center;        /* Centraliza ícone e texto */
+  gap: 8px;                   /* Espaçamento entre ícone e texto */
+  font-weight: 600;           /* Texto mais marcante */
+}
+
+/* Botão de exportar */
+.export-btn { 
+  background: var(--green);   /* Cor verde indica ação positiva */
+  color: white;               /* Contraste com o fundo */
+}
+
+/* Botão de importar */
+.import-btn { 
+  background: var(--purple);  /* Roxo para diferenciar da exportação */
+  color: white;
+}
+
+/* Botão de limpar */
+.clear-btn { 
+  background: #ff6b6b;        /* Vermelho alerta para ação destrutiva */
+  color: white;
+}
+
+/*   ESTATÍSTICAS / DATAS    */
+
+/* Grid para exibir estatísticas */
+.stats-grid {
+  display: grid;                                          /* Layout em grid */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  /* Responsivo:
+     - Cada bloco terá no mínimo 150px
+     - O restante do espaço é dividido igualmente */
+  gap: 15px;                                              /* Espaço entre blocos */
+}
+
+/* Cada item de data dentro da seção */
+.date-item {
+  display: flex;                                          /* Layout flexível */
+  justify-content: space-between;                         /* Data de um lado, ação do outro */
+  align-items: center;                                    /* Centraliza verticalmente */
+  padding: 15px;                                          /* Espaçamento interno */
+  background: var(--bg);                                  /* Fundo suave */
+  border-radius: 8px;                                     /* Bordas arredondadas */
+  margin-bottom: 10px;                                    /* Espaço entre itens */
+}
+
+/* Indicação de "quantos dias atrás" */
+.days-ago {
+  font-size: 12px;                                        /* Texto pequeno */
+  color: var(--muted);                                    /* Cor discreta */
+}
+
+
+/*UTILITÁRIOS*/
+
+/* Estilo específico para parágrafos dentro de cards */
+.card p { 
+  color: #666;                 /* Texto em cinza médio para leitura mais suave */
+}
+
+/* Estado "vazio" (quando não há dados a exibir) */
+.empty-state {
+  text-align: center;          /* Centraliza o conteúdo */
+  color: var(--muted);         /* Usa cor mais apagada para indicar estado secundário */
+  font-style: italic;          /* Itálico para dar tom diferenciado e sugestivo */
+  padding: 40px 20px;          /* Espaçamento generoso para não parecer "apertado" */
+}
+
+/*RESPONSIVIDADE*/
+/* 
+   Ajustes para telas menores ou iguais a 768px (tablets e celulares).
+   Aqui, o layout se reorganiza para melhorar a experiência em dispositivos menores.
+*/
+@media (max-width: 768px) {
+
+  /* Container principal passa de horizontal para vertical */
+  .container {
+    flex-direction: column;
+  }
+  
+  /* Sidebar ocupa largura total no topo da tela */
+  .sidebar {
+    width: 100%;                           /* Sidebar se adapta à largura total */
+    height: auto;                          /* Altura automática em vez de fixa */
+    border-right: none;                    /* Remove borda lateral */
+    border-bottom: 1px solid var(--line);  /* Adiciona uma borda inferior */
+  }
+  
+  /* Menu da sidebar vira horizontal e pode rolar para os lados */
+  .sidebar ul {
+    flex-direction: row;   /* Itens ficam lado a lado */
+    overflow-x: auto;      /* Permite rolagem horizontal caso não caibam */
+    gap: 10px;             /* Espaço entre os itens do menu */
+  }
+  
+  /* Links da sidebar ficam mais compactos */
+  .sidebar a {
+    white-space: nowrap;   /* Evita quebra de texto em duas linhas */
+    min-width: auto;       /* Remove largura mínima para se adaptar melhor */
+  }
+  
+  /* Conteúdo principal tem padding reduzido */
+  .content {
+    padding: 15px;
+  }
+  
+  /* Cabeçalho da página se reorganiza em coluna */
+  .page-header {
+    flex-direction: column; /* Empilha elementos verticalmente */
+    gap: 15px;              /* Espaço entre eles */
+    align-items: stretch;   /* Cada item ocupa toda a largura */
+  }
+  
+  /* Linhas de formulário passam a ter apenas uma coluna */
+  .form-row {
+    grid-template-columns: 1fr; /* Um campo por linha */
+  }
+  
+  /* Grades de desejos, notas, fotos e viagens ficam em 1 coluna */
+  .wishes-grid, .notes-grid, .photos-grid, .trips-grid {
+    grid-template-columns: 1fr; /* Cada item ocupa a largura total */
+  }
+  
+  /* Grades de estatísticas se ajustam em 2 colunas */
+  .stats, .gallery-stats, .trip-stats, .achievements-stats {
+    grid-template-columns: repeat(2, 1fr); /* Duas colunas lado a lado */
+  }
+  
+  /* Modais ocupam quase toda a largura da tela */
+  .modal-content {
+    width: 95%;             /* Quase largura total */
+    margin: 20px auto;      /* Centralizado com margem superior/inferior */
+  }
+}
