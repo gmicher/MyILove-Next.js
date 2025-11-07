@@ -32,7 +32,7 @@ Escalabilidade: o sistema pode crescer sem comprometer o desempenho.
 
 UX aprimorada: carregamentos mais rápidos, navegação fluida e visual mais moderno.
 
-<img width="681" height="274" alt="Captura de tela 2025-10-23 192402" src="https://github.com/user-attachments/assets/bf1ec963-2c9b-470b-9a4a-d1ae84ceb9a3" />
+
 
 
 Protótipos e Ideação Visual
