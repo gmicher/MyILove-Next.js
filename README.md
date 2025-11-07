@@ -1,3 +1,9 @@
+Integrantes:
+• Gustavo Micher Santana - RA : 10737606
+• Lucas Zeferino – RA: 10396267
+• Caio Mussi - RA : 10735885
+• Vitor Carneiro RA : 10748048
+
 Evolução e Migração para React/Next.js
 
 Com o avanço do projeto e a necessidade de melhorar o desempenho e a organização do código, o MyILove foi migrado para o framework Next.js (React 19 e Next.js 15), que trouxe uma estrutura mais moderna, componentizada e fácil de manter.
@@ -193,6 +199,6 @@ Se houver conquistas registradas, a função passa para a próxima etapa: a cons
 - O tipo da conquista, gerado pela função getAchievementType(item);
 - Uma breve descrição, que só é mostrada se existir (item.description) e é truncada para não ficar muito longa, usando truncateText(item.description, 60);
 - E, por fim, a pontuação associada à conquista, calculada por calculateScore(item).
-- 
+  
 Além disso, cada item é clicável: ao ser selecionado, ele chama a função viewAchievement(item.id), que provavelmente exibe mais detalhes sobre a conquista.
 Por fim, após gerar todo o conteúdo HTML, o código usa .join('') para juntar os blocos em uma única string e insere tudo dentro do elemento timeline através de innerHTML. Para finalizar, lucide.createIcons() é chamado novamente, garantindo que todos os ícones das conquistas sejam renderizados corretamente após a atualização do conteúdo.
