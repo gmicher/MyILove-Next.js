@@ -9,6 +9,7 @@ Integrantes:
 • Vitor Carneiro RA : 10748048
 
 
+
 Evolução e Migração para React/Next.js
 
 Com o avanço do projeto e a necessidade de melhorar o desempenho e a organização do código, o MyILove foi migrado para o framework Next.js (React 19 e Next.js 15), que trouxe uma estrutura mais moderna, componentizada e fácil de manter.
