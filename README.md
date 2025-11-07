@@ -1,4 +1,5 @@
 Integrantes:
+
 • Gustavo Micher Santana - RA : 10737606
 
 • Lucas Zeferino – RA: 10396267
@@ -6,6 +7,7 @@ Integrantes:
 • Caio Mussi - RA : 10735885
 
 • Vitor Carneiro RA : 10748048
+
 
 Evolução e Migração para React/Next.js
 
